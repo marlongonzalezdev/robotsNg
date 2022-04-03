@@ -1,0 +1,9 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Mars Deployment</h1>
+  <mat-grid-list cols="2" rowHeight="350px">
+    <mr-input-form *ngIf="!showOutput" (onDeployment)="deploy($event)"></mr-input-form>
+    <mr-movements-output *ngIf="showOutput" [movements]="movements" [height]="marsHeight"
+                         [width]="marsWidth"></mr-movements-output>
+  </mat-grid-list>
+</div>
+

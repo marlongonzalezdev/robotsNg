@@ -1,0 +1,11 @@
+.form-row {
+  display: flex;
+  flex-direction: row;
+}
+.actions{
+  display: flex;
+  flex-direction: row;
+  button:first-of-type {
+    margin-right: 8px;
+  }
+}

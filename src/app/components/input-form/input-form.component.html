@@ -1,0 +1,56 @@
+<form class="input-form" [formGroup]="form">
+  <div class="form-row" formGroupName="upRightCoordinates">
+    <mat-form-field appearance="outline">
+      <mat-label>Upper-Right Coordinates (X)</mat-label>
+      <input matInput formControlName="x">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Upper-Right Coordinates (Y)</mat-label>
+      <input matInput formControlName="y">
+    </mat-form-field>
+  </div>
+  <div class="deployments-container">
+    <h3>Robots Deployments</h3>
+    <ng-container formArrayName="deployments">
+      <ng-container *ngFor="let deploymentForm of deployments.controls; let i=index;">
+        <ng-container [formGroupName]="i">
+          <div class="form-row">
+            <div class="form-row" formGroupName="coordinates">
+              <mat-form-field appearance="outline">
+                <mat-label>Coordinate (X)</mat-label>
+                <input matInput formControlName="x">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Coordinate (Y)</mat-label>
+                <input matInput formControlName="y">
+              </mat-form-field>
+            </div>
+            <mat-form-field appearance="outline">
+              <mat-label>Orientation</mat-label>
+              <mat-select formControlName="orientation">
+                <mat-option [value]="orientations.NORTH">NORTH</mat-option>
+                <mat-option [value]="orientations.EAST">EAST</mat-option>
+                <mat-option [value]="orientations.SOUTH">SOUTH</mat-option>
+                <mat-option [value]="orientations.WEST">WEST</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Movements</mat-label>
+              <input matInput formControlName="instructions">
+            </mat-form-field>
+            <button mat-icon-button>
+              <mat-icon class="delete-btn" (click)="removeDeployment(i)">delete_forever</mat-icon>
+            </button>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</form>
+<div class="actions">
+  <button mat-mini-fab (click)="addDeployment()">
+    <mat-icon class="add-robot-btn">add</mat-icon>
+  </button>
+  <button mat-raised-button color="primary" [disabled]="!form.valid || deployments.length===0" (click)="deploy()">Deploy</button>
+</div>
+

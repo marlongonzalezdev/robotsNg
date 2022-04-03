@@ -1,0 +1,19 @@
+<div class="container">
+  <table class="grid">
+    <tr *ngFor="let row of marsSurface.rows">
+      <td *ngFor="let col of marsSurface.cols" [class.with-scent]="lostRobots.has(col+','+row)">
+        <span>{{col}},{{row}}</span>
+        <span
+          *ngIf="locateRobotAt(currentStep, col, row)">{{Orientation[locateRobotAt(currentStep, col, row)?.orientation || 0]}}</span>
+        <img *ngIf="locateRobotAt(currentStep, col, row)" src="assets/robot.png" alt="Robot">
+      </td>
+    </tr>
+  </table>
+  <div class="navigation">
+    Robot:{{currentRobot + 1}}  Movement:{{currentStep + 1}}/{{getMovements}}
+    <div>
+      <button mat-raised-button color="primary" (click)="goBack()">Back</button>
+      <button mat-raised-button color="primary" (click)="goForward()" [disabled]="lastMovement">Forward</button>
+    </div>
+  </div>
+</div>
